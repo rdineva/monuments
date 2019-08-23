@@ -25,24 +25,24 @@ export function MonumentForm() {
     return (
         <div className={classes.form}>
             <form noValidate>
-                <h1>Create Monument</h1>
+                <h1>Създай Паметник</h1>
                 <div>
-                    <MonumentInput label="Title" type="text" id="title" placeholder="Enter title..." onChange={setStatueTitle} />
+                    <MonumentInput label='Име' type='text' id='title' placeholder='Въведи име...' onChange={setStatueTitle} />
                 </div>
                 <div>
-                    <MonumentInput label="Inscription" type="text" id="inscription" placeholder="Enter inscription..." onChange={setInscription} />
+                    <MonumentInput label='Надпис' type='text' id='inscription' placeholder='Въведи надпис...' onChange={setInscription} />
                 </div>
                 <div>
-                    <MonumentInput label="Latitude" type="text" id="latitude" placeholder="Enter latitude..." onChange={setLatitude} />
+                    <MonumentInput label='Ширина' type='text' id='latitude' placeholder='Въведи ширина...' onChange={setLatitude} />
                 </div>
                 <div>
-                    <MonumentInput label="Longitude" type="text" id="longitude" placeholder="Enter longitude..." onChange={setLongitude} />
+                    <MonumentInput label='Дължина' type='text' id='longitude' placeholder='Въведи дължина...' onChange={setLongitude} />
                 </div>
                 <div>
-                    <MonumentInput label="Public Figure" type="text" id="publicFigure" placeholder="Enter public figure..." onChange={setPublicFigure} />
+                    <MonumentInput label='Публична Личност' type='text' id='publicFigure' placeholder='Въведи публична личност...' onChange={setPublicFigure} />
                 </div>
                 <div>
-                    <Button className={classes.button} variant="outlined" color="inherit">Create Monument</Button>
+                    <Button className={classes.button} variant='outlined' color='inherit'>Създай</Button>
                 </div>
             </form>
         </div>

@@ -1,5 +1,5 @@
-import { Observable } from "./observable";
-import { Monument } from "./monument";
+import { Observable } from './observable';
+import { Monument } from './monument';
 import { getData } from '../../monuments-data';
 
 interface StoreData {

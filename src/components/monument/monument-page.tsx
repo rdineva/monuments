@@ -38,15 +38,12 @@ export function MonumentPage(props: Props) {
   }, []);
 
   return monument && (
-    <Container maxWidth="md" className={classes.container}>
+    <Container maxWidth='md' className={classes.container}>
       <Typography variant='h5'>{monument.title}</Typography>
       <Typography variant='subtitle1'>Координати: [{monument.latitude}, {monument.longitude}]</Typography>
-      <CardMedia className={classes.media}
-        component="img"
+      <CardMedia component='img' 
         alt={monument.title}
-        image={monument.image}
-        title={monument.title}
-      />
+        image={monument.image} />
     </Container>
   );
 }

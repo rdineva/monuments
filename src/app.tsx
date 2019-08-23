@@ -5,8 +5,9 @@ import { CustomAppBar } from './components/app-bar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { MonumentPage } from './components/monument/monument-page';
 import { CssBaseline } from '@material-ui/core';
+import { MonumentsMap } from './components/monument/monuments-map';
 
-export function App() {
+export function App()  {
   return (
     <>
       <BrowserRouter>
@@ -15,7 +16,8 @@ export function App() {
         <Switch>
           <Route path='/monuments/create' exact component={MonumentForm} />
           <Route path='/monuments/:id' exact component={MonumentPage} />
-          <Route path='/' exact component={MonumentsList} />
+          <Route path='/monuments' exact component={MonumentsList} />
+          <Route path='/' exact component={MonumentsMap} />
         </Switch>
       </BrowserRouter>
     </>

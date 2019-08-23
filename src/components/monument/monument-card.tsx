@@ -10,9 +10,16 @@ interface Props {
 
 const useStyles = makeStyles({
   button: {
-    //TODO: align right
-    alignContent: 'right',
+    alignSelf: 'end',
     backgroundColor: 'black',
+  },
+  card: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column'
+  },
+  cardActions: {
+    alignSelf: 'end',
   }
 });
 
@@ -27,26 +34,26 @@ export function MonumentCard(props: Props) {
   }
 
   return redirect || (
-    <Card ref={ref}>
+    <Card ref={ref} className={classes.card}>
       <CardActionArea>
         <CardMedia
-          component="img"
+          component='img'
           alt={props.title}
-          height="140"
+          height='140'
           image={props.image}
           title={props.title}
         />
         <CardContent>
-          <Typography variant="h5" component="h2">
-            {props.title}         
+          <Typography variant='h5' component='h2'>
+            {props.title}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button onClick={() => onMonumentClick(props)} 
-          variant="contained" 
-          color="primary" className={classes.button}>
-            Виж Повече
+      <CardActions className={classes.cardActions}>
+        <Button onClick={() => onMonumentClick(props)}
+          variant='contained'
+          color='primary' className={classes.button}>
+          Виж Повече
         </Button>
       </CardActions>
     </Card>

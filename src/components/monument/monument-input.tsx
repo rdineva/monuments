@@ -12,7 +12,7 @@ interface Props {
 export function MonumentInput(props: Props) {
     return (
         <TextField 
-            margin="normal"
+            margin='normal'
             label={props.label}
             type={props.type}
             id={props.id}

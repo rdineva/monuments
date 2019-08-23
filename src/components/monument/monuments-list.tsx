@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Monument } from '../../store/monument';
 import { store } from '../../store/store';
-import { Container } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { MonumentCard } from './monument-card';
+import { MonumentsTitle } from './monuments-title';
 
 const useStyles = makeStyles({
   container: {
@@ -11,6 +12,11 @@ const useStyles = makeStyles({
     gridTemplateColumns: 'auto auto auto',
     gridGap: '10px',
     marginTop: '15px',
+    marginBottom: '35px'
+  },
+  title: {
+    textAlign: 'center',
+    margin: '20px'
   }
 });
 
@@ -30,8 +36,11 @@ export function MonumentsList() {
   }, []);
 
   return (
-    <Container maxWidth="md" className={classes.container}>
-      {monuments.map((monument, i) => <MonumentCard id={monument.id} title={monument.title} image={monument.image}/>)}
-    </Container>
+    <>
+      <MonumentsTitle />
+      <Container maxWidth='md' className={classes.container}>
+        {monuments.map((monument) => <MonumentCard key={monument.id} id={monument.id} title={monument.title} image={monument.image} />)}
+      </Container>
+    </>
   );
 }
