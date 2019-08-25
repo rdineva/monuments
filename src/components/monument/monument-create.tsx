@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import React from 'react';
-import { MonumentInput } from './monument-input';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles({
     form: {
-        textAlign: 'center', 
+        textAlign: 'center',
         marginLeft: '2px'
     },
     button: {
@@ -15,8 +14,8 @@ const useStyles = makeStyles({
 
 export function MonumentForm() {
     const classes = useStyles({});
-
-    const [title, setStatueTitle] = useState('Statue');
+    
+    const [statueName, setStatueName] = useState('Statue');
     const [publicFigure, setPublicFigure] = useState('Public Figure');
     const [inscription, setInscription] = useState('Inscription');
     const [latitude, setLatitude] = useState('Latitude');
@@ -27,19 +26,49 @@ export function MonumentForm() {
             <form noValidate>
                 <h1>Създай Паметник</h1>
                 <div>
-                    <MonumentInput label='Име' type='text' id='title' placeholder='Въведи име...' onChange={setStatueTitle} />
+                    <TextField
+                        margin='normal'
+                        label='Име'
+                        type='text'
+                        id='name'
+                        placeholder='Въведи име...'
+                        onChange={(event) => setStatueName(event.target.value)} />
                 </div>
                 <div>
-                    <MonumentInput label='Надпис' type='text' id='inscription' placeholder='Въведи надпис...' onChange={setInscription} />
+                    <TextField
+                        margin='normal'
+                        label='Надпис'
+                        type='text'
+                        id='inscription'
+                        placeholder='Въведи надпис...'
+                        onChange={(event) => setInscription(event.target.value)} />
                 </div>
                 <div>
-                    <MonumentInput label='Ширина' type='text' id='latitude' placeholder='Въведи ширина...' onChange={setLatitude} />
+                    <TextField
+                        margin='normal'
+                        label='Ширина'
+                        type='text'
+                        id='latitude'
+                        placeholder='Въведи ширина...'
+                        onChange={(event) => setLatitude(event.target.value)} />
                 </div>
                 <div>
-                    <MonumentInput label='Дължина' type='text' id='longitude' placeholder='Въведи дължина...' onChange={setLongitude} />
+                    <TextField
+                        margin='normal'
+                        label='Дължина'
+                        type='text'
+                        id='longitude'
+                        placeholder='Въведи дължина...'
+                        onChange={(event) => setLongitude(event.target.value)} />
                 </div>
                 <div>
-                    <MonumentInput label='Публична Личност' type='text' id='publicFigure' placeholder='Въведи публична личност...' onChange={setPublicFigure} />
+                    <TextField
+                        margin='normal'
+                        label='Публична Личност'
+                        type='text'
+                        id='publicFigure'
+                        placeholder='Въведи публична личност...'
+                        onChange={(event) => setPublicFigure(event.target.value)} />
                 </div>
                 <div>
                     <Button className={classes.button} variant='outlined' color='inherit'>Създай</Button>

@@ -1,29 +1,25 @@
 import { Observable } from './observable';
 import { Monument } from './monument';
-import { getData } from '../../monuments-data';
+import { httpService } from "../services/http";
 
 interface StoreData {
-    monuments: Monument[];
+  monuments: Monument[];
 }
 
 class Store extends Observable<void> {
-    readonly data: StoreData = {
-        monuments: [],
-    };
+  readonly data: StoreData = {
+    monuments: [],
+  };
 
-    async loadMonuments() {
-        const monuments = await this.fetchMonuments();
-        this.data.monuments = monuments;
-        this.notify();
-    } 
+  async loadMonuments() {
+    const monuments = await this.fetchMonuments();
+    this.data.monuments = monuments;
+    this.notify();
+  }
 
-    private async fetchMonuments() {
-        return new Promise<Monument[]>(resolve => {
-            setTimeout(() => {
-                resolve(getData());
-            }, 1000);
-        });
-    }
+  private async fetchMonuments() {
+    return httpService.get('monuments');
+  }
 }
 
 export const store = new Store();

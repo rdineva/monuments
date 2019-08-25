@@ -13,7 +13,9 @@ module.exports = {
   mode: IS_PRODUCTION ? 'production' : 'development',
   devtool: IS_PRODUCTION ? '' : 'inline-source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000
   },
   module: {
     rules: [
@@ -38,7 +40,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'React Playground',
+      title: 'Monuments',
       filename: 'index.html',
       template: 'src/index.ejs'
     }),

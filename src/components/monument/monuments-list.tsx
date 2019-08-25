@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Monument } from '../../store/monument';
 import { store } from '../../store/store';
-import { Container, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { MonumentCard } from './monument-card';
 import { MonumentsTitle } from './monuments-title';
@@ -30,16 +30,23 @@ export function MonumentsList() {
     store.addObserver(observer);
     store.loadMonuments();
 
-    return function cleanup() {
-      store.removeObserver(observer);
-    }
+    return () => store.removeObserver(observer);
   }, []);
 
   return (
     <>
       <MonumentsTitle />
-      <Container maxWidth='md' className={classes.container}>
-        {monuments.map((monument) => <MonumentCard key={monument.id} id={monument.id} title={monument.title} image={monument.image} />)}
+      <Container
+        maxWidth='md'
+        className={classes.container}>
+        {monuments.map((monument) =>
+          <MonumentCard
+            key={monument.id}
+            id={monument.id}
+            title={monument.title}
+            image={monument.image}
+          />
+        )}
       </Container>
     </>
   );
