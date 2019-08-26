@@ -6,10 +6,16 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { MonumentPage } from './components/monument/monument-page';
 import { CssBaseline } from '@material-ui/core';
 import { MonumentsMap } from './components/monument/monuments-map';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './store';
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export function App()  {
   return (
-    <>
+    <Provider store={store}>
       <BrowserRouter>
         <CssBaseline />
         <CustomAppBar />
@@ -20,6 +26,6 @@ export function App()  {
           <Route path='/' exact component={MonumentsMap} />
         </Switch>
       </BrowserRouter>
-    </>
+    </Provider>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Monument } from '../../store/monument';
-import { store } from '../../store/store';
+import { Monument } from '../../entities/monument';
 import { Typography, Container, makeStyles, CardMedia } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 interface Props extends RouteComponentProps<{ id: string }> { }
 
@@ -17,30 +17,21 @@ const useStyles = makeStyles({
 });
 
 export function MonumentPage(props: Props) {
-  return <></>;
-//   const classes = useStyles({});
-//   const id = props.match.params.id;
-//   const [monument, setMonument] = useState<Monument>(null);
-//   const observer = useCallback(() => setMonument(store.data.monument)), []);
+  const classes = useStyles({});
+  const id = props.match.params.id;
 
-//   useEffect(() => {
-//     setMonument(store.data.monument);
-//     store.addObserver(observer);
-//     store.loadMonumentById(id);
+  const monuments: Monument[] = useSelector((state: any) => state.monuments.monuments);
+  const monument = monuments.find(m => m.id == id);
 
-//     return () => store.removeObserver(observer);
-//   }, []);
-
-//   return monument && (
-//     <Container maxWidth='md' className={classes.container}>
-//       <Typography variant='h5'>{monument.name}</Typography>
-//       <Typography variant='subtitle1'>
-//         Координати: [{monument.latitude}, {monument.longitude}]
-//       </Typography>
-//       <CardMedia component='img'
-//         alt={monument.name}
-//         image={monument.image} />
-//     </Container>
-//   );
-//   return <></>;
+  return monument && (
+    <Container maxWidth='md' className={classes.container}>
+      <Typography variant='h5'>{monument.name}</Typography>
+      <Typography variant='subtitle1'>
+        Координати: [{monument.latitude}, {monument.longitude}]
+      </Typography>
+      <CardMedia component='img'
+        alt={monument.name}
+        image={monument.image} />
+    </Container>
+  );
 }

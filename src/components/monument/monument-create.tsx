@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import React from 'react';
 import { Button, makeStyles, TextField } from '@material-ui/core';
-import { store } from '../../store/store';
+import { createMonument } from '../../store/monuments/actions';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles({
     form: {
@@ -22,6 +23,7 @@ export function MonumentForm() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
 
+    const dispatch = useDispatch();
 
     return (
         <div className={classes.form}>
@@ -33,7 +35,7 @@ export function MonumentForm() {
                         margin='normal'
                         label='Име'
                         type='text'
-                        id='title'
+                        id='name'
                         placeholder='Въведи име...'
                         onChange={event => setStatueTitle(event.target.value)}
                     />
@@ -93,7 +95,7 @@ export function MonumentForm() {
                                 'publicFigure': publicFigure,
                             };
 
-                            store.createMonument(body);
+                            dispatch(createMonument(body));
                         }
                         }
                     >Създай

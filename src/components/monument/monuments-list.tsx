@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Monument } from '../../store/monument';
-import { store } from '../../store/store';
+import { Monument } from '../../entities/monument';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { MonumentCard } from './monument-card';
 import { MonumentsTitle } from './monuments-title';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadMonuments } from '../../store/monuments/actions';
 
 const useStyles = makeStyles({
   container: {
@@ -21,16 +22,12 @@ const useStyles = makeStyles({
 });
 
 export function MonumentsList() {
-  const [monuments, setMonuments] = useState<Monument[]>([]);
   const classes = useStyles({});
-  const observer = useCallback(() => setMonuments(store.data.monuments), []);
+  const monuments: Monument[] = useSelector((state: any) => state.monuments.monuments);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setMonuments(store.data.monuments);
-    store.addObserver(observer);
-    store.loadMonuments();
-
-    return () => store.removeObserver(observer);
+    dispatch(loadMonuments());
   }, []);
 
   return (
