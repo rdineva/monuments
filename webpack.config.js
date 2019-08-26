@@ -40,7 +40,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Monuments',
+      title: 'React Playground',
       filename: 'index.html',
       template: 'src/index.ejs'
     }),

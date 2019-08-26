@@ -17,37 +17,30 @@ const useStyles = makeStyles({
 });
 
 export function MonumentPage(props: Props) {
-  const classes = useStyles({});
+  return <></>;
+//   const classes = useStyles({});
+//   const id = props.match.params.id;
+//   const [monument, setMonument] = useState<Monument>(null);
+//   const observer = useCallback(() => setMonument(store.data.monument)), []);
 
-  const id = props.match.params.id;
-  const [monument, setMonument] = useState<Monument>(null);
+//   useEffect(() => {
+//     setMonument(store.data.monument);
+//     store.addObserver(observer);
+//     store.loadMonumentById(id);
 
-  function findMonument() {
-    return store.data.monuments.find(m => m.id === id);
-  }
+//     return () => store.removeObserver(observer);
+//   }, []);
 
-  const observer = useCallback(() => setMonument(findMonument()), []);
-
-  useEffect(() => {
-    setMonument(findMonument());
-    store.addObserver(observer);
-    store.loadMonuments();
-    return () => store.removeObserver(observer);
-  }, []);
-
-  return monument && (
-    <Container
-      maxWidth='md'
-      className={classes.container}>
-      <Typography variant='h5'>
-        {monument.title}
-      </Typography>
-      <Typography variant='subtitle1'>
-        Координати: [{monument.latitude}, {monument.longitude}]
-      </Typography>
-      <CardMedia component='img'
-        alt={monument.title}
-        image={monument.image} />
-    </Container>
-  );
+//   return monument && (
+//     <Container maxWidth='md' className={classes.container}>
+//       <Typography variant='h5'>{monument.name}</Typography>
+//       <Typography variant='subtitle1'>
+//         Координати: [{monument.latitude}, {monument.longitude}]
+//       </Typography>
+//       <CardMedia component='img'
+//         alt={monument.name}
+//         image={monument.image} />
+//     </Container>
+//   );
+//   return <></>;
 }

@@ -44,17 +44,20 @@ export function MonumentCard(props: Props) {
           title={props.title}
         />
         <CardContent>
-          <Typography variant='h5' component='h2'>
-            {props.title}
+          <Typography 
+            variant='h5' 
+            component='h2'>
+              {props.title}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions className={classes.cardActions}>
-        <Button onClick={() => onMonumentClick(props)}
-          variant='contained'
-          color='primary' className={classes.button}>
-          Виж Повече
-        </Button>
+      <CardActions 
+        className={classes.cardActions}>
+          <Button onClick={() => onMonumentClick(props)}
+            variant='contained'
+            color='primary' className={classes.button}>
+              Виж Повече
+          </Button>
       </CardActions>
     </Card>
   );

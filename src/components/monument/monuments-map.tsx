@@ -4,7 +4,7 @@ import {
   MapBox,
   Marker
 } from '@googlemap-react/core'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MonumentsTitle } from './monuments-title';
 import { getData } from '../../../monuments-data';
 

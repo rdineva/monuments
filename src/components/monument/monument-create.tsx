@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React from 'react';
 import { Button, makeStyles, TextField } from '@material-ui/core';
+import { store } from '../../store/store';
 
 const useStyles = makeStyles({
     form: {
@@ -14,66 +15,91 @@ const useStyles = makeStyles({
 
 export function MonumentForm() {
     const classes = useStyles({});
-    
-    const [statueName, setStatueName] = useState('Statue');
-    const [publicFigure, setPublicFigure] = useState('Public Figure');
-    const [inscription, setInscription] = useState('Inscription');
-    const [latitude, setLatitude] = useState('Latitude');
-    const [longitude, setLongitude] = useState('Longitude');
+
+    const [statueTitle, setStatueTitle] = useState('');
+    const [publicFigure, setPublicFigure] = useState('');
+    const [inscription, setInscription] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+
 
     return (
         <div className={classes.form}>
-            <form noValidate>
+            <div >
                 <h1>Създай Паметник</h1>
                 <div>
                     <TextField
+                        name='name'
                         margin='normal'
                         label='Име'
                         type='text'
-                        id='name'
+                        id='title'
                         placeholder='Въведи име...'
-                        onChange={(event) => setStatueName(event.target.value)} />
+                        onChange={event => setStatueTitle(event.target.value)}
+                    />
                 </div>
                 <div>
                     <TextField
+                        name='inscription'
                         margin='normal'
                         label='Надпис'
                         type='text'
                         id='inscription'
                         placeholder='Въведи надпис...'
-                        onChange={(event) => setInscription(event.target.value)} />
+                        onChange={event => setInscription(event.target.value)} />
                 </div>
                 <div>
                     <TextField
+                        name='latitude'
                         margin='normal'
                         label='Ширина'
                         type='text'
                         id='latitude'
                         placeholder='Въведи ширина...'
-                        onChange={(event) => setLatitude(event.target.value)} />
+                        onChange={event => setLatitude(event.target.value)} />
                 </div>
                 <div>
                     <TextField
+                        name='longitude'
                         margin='normal'
                         label='Дължина'
                         type='text'
                         id='longitude'
                         placeholder='Въведи дължина...'
-                        onChange={(event) => setLongitude(event.target.value)} />
+                        onChange={event => setLongitude(event.target.value)} />
                 </div>
                 <div>
                     <TextField
+                        name='publicFigure'
                         margin='normal'
                         label='Публична Личност'
                         type='text'
                         id='publicFigure'
                         placeholder='Въведи публична личност...'
-                        onChange={(event) => setPublicFigure(event.target.value)} />
+                        onChange={event => setPublicFigure(event.target.value)} />
                 </div>
                 <div>
-                    <Button className={classes.button} variant='outlined' color='inherit'>Създай</Button>
+                    <Button
+                        type='submit'
+                        className={classes.button}
+                        variant='outlined'
+                        color='inherit'
+                        onClick={() => {
+                            let body = {
+                                'name': statueTitle,
+                                'inscription': inscription,
+                                'latitude': latitude,
+                                'longitude': longitude,
+                                'publicFigure': publicFigure,
+                            };
+
+                            store.createMonument(body);
+                        }
+                        }
+                    >Създай
+                    </Button>
                 </div>
-            </form>
+            </div>
         </div>
     );
 }

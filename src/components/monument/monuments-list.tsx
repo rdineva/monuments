@@ -36,17 +36,17 @@ export function MonumentsList() {
   return (
     <>
       <MonumentsTitle />
-      <Container
-        maxWidth='md'
+      <Container 
+        maxWidth='md' 
         className={classes.container}>
-        {monuments.map((monument) =>
-          <MonumentCard
-            key={monument.id}
-            id={monument.id}
-            title={monument.title}
-            image={monument.image}
-          />
-        )}
+          {monuments.map((monument) => 
+            <MonumentCard 
+              key={monument.id} 
+              id={monument.id} 
+              title={monument.name} 
+              image={monument.image} 
+            />
+          )}
       </Container>
     </>
   );

@@ -1,6 +1,6 @@
 export interface Monument {
     id: string;
-    title: string;
+    name: string;
     latitude: string;
     longitude: string;
     image: string;

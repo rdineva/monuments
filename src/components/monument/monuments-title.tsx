@@ -13,8 +13,6 @@ export function MonumentsTitle() {
   const classes = useStyles({});
 
   return (
-    <>
       <Typography className={classes.title} variant='h4'>Паметници в Борисовата Градина</Typography>
-    </>
   );
 }
