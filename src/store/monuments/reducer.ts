@@ -1,19 +1,29 @@
-import { SELECT_MONUMENT_ACTION_TYPE, LOAD_MONUMENTS_SUCCESS } from './actions';
+import { MonumentsAction, actions } from './actions';
 import { Monument } from '../../entities/monument';
 import { combineReducers } from 'redux';
+import { getType } from 'typesafe-actions';
 
-function selectedMonument(state: Monument = null, action: any): Monument {
+function selectedMonument(state: Monument = null, action: MonumentsAction): Monument {
   switch (action.type) {
-    case SELECT_MONUMENT_ACTION_TYPE:
+    case getType(actions.selectMonument):
       return action.payload;
     default:
       return state;
   }
 }
 
-function monuments(state: Monument[] = [], action: any): Monument[] {
+function monuments(state: Monument[] = [], action: MonumentsAction): Monument[] {
   switch (action.type) {
-    case LOAD_MONUMENTS_SUCCESS:
+    case getType(actions.loadMonuments.success):
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function createdMonument(state: Monument = null, action: MonumentsAction): Monument {
+  switch (action.type) {
+    case getType(actions.createMonument.success):
       return action.payload;
     default:
       return state;
@@ -23,4 +33,5 @@ function monuments(state: Monument[] = [], action: any): Monument[] {
 export default combineReducers({
   selectedMonument,
   monuments,
+  createdMonument
 });

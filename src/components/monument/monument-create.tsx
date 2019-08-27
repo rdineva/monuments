@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, makeStyles, TextField } from '@material-ui/core';
 import { createMonument } from '../../store/monuments/actions';
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router';
+import { useAppState } from '../../hooks/use-app-state';
 
 const useStyles = makeStyles({
     form: {
@@ -24,8 +25,14 @@ export function MonumentForm() {
     const [longitude, setLongitude] = useState('');
 
     const dispatch = useDispatch();
+    const [onCreatedRedirect, setOnCreatedRedirect] = useState(null);
+    const createdMonument = useAppState(state => state.monuments.createdMonument);
 
-    return (
+    if(createdMonument && !onCreatedRedirect) {
+        setOnCreatedRedirect(<Redirect to={`/monuments/${createdMonument.id}`} push />);
+    }
+
+    return onCreatedRedirect || (
         <div className={classes.form}>
             <div >
                 <h1>Създай Паметник</h1>
@@ -86,8 +93,8 @@ export function MonumentForm() {
                         className={classes.button}
                         variant='outlined'
                         color='inherit'
-                        onClick={() => {
-                            let body = {
+                        onClick={ () => {
+                            const body = {
                                 'name': statueTitle,
                                 'inscription': inscription,
                                 'latitude': latitude,
@@ -96,8 +103,7 @@ export function MonumentForm() {
                             };
 
                             dispatch(createMonument(body));
-                        }
-                        }
+                        }}
                     >Създай
                     </Button>
                 </div>

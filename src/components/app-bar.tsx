@@ -79,34 +79,34 @@ export function CustomAppBar() {
   }, [redirect]);
 
   return (
-    <>
-      <div className={classes.root}>
-        <AppBar position='static' color='default'>
-          <Toolbar>
-            <IconButton edge='start'
-              className={classes.menuButton}
-              color='inherit'
-              aria-label='menu'>
-              <MenuIcon />
-            </IconButton>
-            <Beenhere className={classes.BeenHereIcon} />
-            <Typography variant='h6'>
-              <Button onClick={() => onButtonClick('/')}
-                className={classes.title}
-              >Начало
+    <div className={classes.root}>
+      <AppBar
+        position='static'
+        color='default'>
+        <Toolbar>
+          <Beenhere
+            className={classes.BeenHereIcon} />
+          <Typography
+            variant='h6'>
+            <Button
+              onClick={() => onButtonClick('/')}
+              className={classes.title}
+            >Начало
               </Button>
-            </Typography>
-            <Typography variant='h6'>
-              <Button onClick={() => onButtonClick('/monuments')}
-                className={classes.title}
-              >Паметници
+          </Typography>
+          <Typography
+            variant='h6'>
+            <Button
+              onClick={() => onButtonClick('/monuments')}
+              className={classes.title}
+            >Паметници
               </Button>
-            </Typography>
+          </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase 
+            <InputBase
               placeholder='Търси...'
               inputProps={{ 'aria-label': 'search' }}
               classes={{
@@ -116,14 +116,14 @@ export function CustomAppBar() {
             />
           </div>
           {redirect}
-          <Button size='large'
+          <Button
+            size='large'
             color='inherit'
             onClick={() => onButtonClick('/monuments/create')}
           >Създай
             </Button>
-          </Toolbar>
-        </AppBar>
+        </Toolbar>
+      </AppBar>
     </div>
-    </>
   );
 }

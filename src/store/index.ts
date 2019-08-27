@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
 import monumentsReducer from './monuments/reducer';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   monuments: monumentsReducer,
 });
+
+export type AppState = ReturnType<typeof rootReducer>;
+
+export default rootReducer;

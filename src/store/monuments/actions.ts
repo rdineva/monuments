@@ -1,43 +1,48 @@
-import { Monument } from '../../entities/monument';
 import { ThunkDispatch } from 'redux-thunk';
 import { httpService } from '../../services/http';
+import { createStandardAction, createAsyncAction, ActionType } from 'typesafe-actions';
+import { Monument } from '../../entities/monument';
 
-export const SELECT_MONUMENT_ACTION_TYPE = '@monuments/selectMonument';
-
-export const LOAD_MONUMENTS_REQUEST = '@monuments/loadMonumentsRequest';
-export const LOAD_MONUMENTS_SUCCESS = '@monuments/loadMonumentsSuccess';
-export const LOAD_MONUMENTS_FAILURE = '@monuments/loadMonumentsFailure';
-
-export const CREATE_MONUMENT_ACTION_TYPE = '@monuments/createMonument'
+export const actions = {
+  selectMonument: createStandardAction(
+    '@monuments/selectMonument')
+    <Monument>(),
+  loadMonuments: createAsyncAction(
+    '@monuments/loadMonumentsRequest',
+    '@monuments/loadMonumentsSuccess',
+    '@monuments/loadMonumentsFailure')
+    <void, Array<Monument>, Error>(),
+  createMonument: createAsyncAction(
+    '@monuments/createMonumentRequest',
+    '@monuments/createMonumentSuccess',
+    '@monuments/createMonumentFailure')
+    <void, Monument, Error>(),
+};
 
 export function loadMonuments() {
   return async (dispatch: ThunkDispatch<any, any, any>) => {
-    dispatch({ type: LOAD_MONUMENTS_REQUEST });
+    dispatch(actions.loadMonuments.request);
     try {
       let monuments = await httpService.get('monuments');
-
-      dispatch({
-        type: LOAD_MONUMENTS_SUCCESS,
-        payload: monuments
-      });
+      dispatch(actions.loadMonuments.success(monuments));
     } catch (error) {
-      dispatch({ type: LOAD_MONUMENTS_FAILURE, payload: error })
+      dispatch(actions.loadMonuments.failure);
     }
   };
 }
 
-export function selectMonument(monument: Monument) {
-  return {
-    type: SELECT_MONUMENT_ACTION_TYPE,
-    payload: monument,
+export function selectMonument(id: string) {
+  return async (dispatch: ThunkDispatch<any, any, any>) => {
+    let monument: Monument = await httpService.get(`monuments/${id}`);
+    dispatch(actions.selectMonument(monument));
   };
 }
 
 export function createMonument(data: any) {
-  return (dispatch: ThunkDispatch<any, any, any>) => {
-    dispatch({
-      type: CREATE_MONUMENT_ACTION_TYPE,
-      payload: httpService.post('monuments/', data, {
+  return async (dispatch: ThunkDispatch<any, any, any>) => {
+    dispatch(actions.createMonument.request);
+    try {
+      let newMonument: Monument = await httpService.post('monuments/', data, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Accept': 'application/json',
@@ -45,7 +50,13 @@ export function createMonument(data: any) {
           "Access-Control-Request-Headers": "*",
           "Access-Control-Request-Method": "*"
         }
-      })
-    });
+      });
+
+      dispatch(actions.createMonument.success(newMonument));
+    } catch (error) {
+      dispatch(actions.createMonument.failure);
+    }
   }
 }
+
+export type MonumentsAction = ActionType<typeof actions>;

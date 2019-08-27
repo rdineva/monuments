@@ -4,4 +4,5 @@ export interface Monument {
     latitude: string;
     longitude: string;
     image: string;
+    publicFigure: string;
 }
