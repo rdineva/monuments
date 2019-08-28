@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { RouteComponentProps } from 'react-router';
+import React from 'react';
 import { Typography, Container, makeStyles, CardMedia } from '@material-ui/core';
-import { useAppState } from '../../hooks/use-app-state';
-import { useDispatch } from 'react-redux';
-import { selectMonument } from '../../store/monuments/actions';
+import { Monument } from '../../entities/monument';
 
-interface Props extends RouteComponentProps<{ id: string }> { }
+interface Props {
+  monument: Monument
+}
 
 const useStyles = makeStyles({
   container: {
@@ -17,16 +16,8 @@ const useStyles = makeStyles({
   }
 });
 
-export function MonumentPage(props: Props) {
+export function MonumentPage({ monument }: Props) {
   const classes = useStyles({});
-  const id = props.match.params.id;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(selectMonument(id));
-  }, []);
-
-  const monument = useAppState(state => state.monuments.selectedMonument);
 
   return monument && (
     <Container
