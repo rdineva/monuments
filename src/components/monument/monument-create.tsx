@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, makeStyles, TextField } from '@material-ui/core';
-import { createMonument } from '../../store/monuments/actions';
-import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router';
-import { useAppState } from '../../hooks/use-app-state';
+import { Monument } from '../../entities/monument';
+
+interface Props {
+    onCreateClick(body: any): void;
+    createdMonument: Monument;
+}
 
 const useStyles = makeStyles({
     form: {
@@ -15,21 +18,17 @@ const useStyles = makeStyles({
     }
 });
 
-export function MonumentForm() {
+export function MonumentCreate(props: Props) {
     const classes = useStyles({});
-
-    const [statueTitle, setStatueTitle] = useState('');
+    const [statueName, setStatueName] = useState('');
     const [publicFigure, setPublicFigure] = useState('');
     const [inscription, setInscription] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
-
-    const dispatch = useDispatch();
     const [onCreatedRedirect, setOnCreatedRedirect] = useState(null);
-    const createdMonument = useAppState(state => state.monuments.createdMonument);
 
-    if(createdMonument && !onCreatedRedirect) {
-        setOnCreatedRedirect(<Redirect to={`/monuments/${createdMonument.id}`} push />);
+    if (props.createdMonument && !onCreatedRedirect) {
+        setOnCreatedRedirect(<Redirect to={`/monuments/${props.createdMonument.id}`} push />);
     }
 
     return onCreatedRedirect || (
@@ -44,7 +43,7 @@ export function MonumentForm() {
                         type='text'
                         id='name'
                         placeholder='Въведи име...'
-                        onChange={event => setStatueTitle(event.target.value)}
+                        onChange={event => setStatueName(event.target.value)}
                     />
                 </div>
                 <div>
@@ -93,17 +92,17 @@ export function MonumentForm() {
                         className={classes.button}
                         variant='outlined'
                         color='inherit'
-                        onClick={ () => {
-                            const body = {
-                                'name': statueTitle,
+                        onClick={() => {
+                            let body = {
+                                'name': statueName,
                                 'inscription': inscription,
-                                'latitude': latitude,
-                                'longitude': longitude,
-                                'publicFigure': publicFigure,
-                            };
+                                'latitude':latitude,
+                                'longitude':longitude,
+                                'publicFigure': publicFigure
+                            }
 
-                            dispatch(createMonument(body));
-                        }}
+                            props.onCreateClick(body)}
+                        }
                     >Създай
                     </Button>
                 </div>

@@ -6,12 +6,14 @@ import { MonumentsList as MonumentsListComponent } from '../../components/monume
 import React from "react";
 
 export function MonumentsList() {
-    const monuments = useAppState(state => state.monuments.monuments);
-    const dispatch = useDispatch();
+  const monuments = useAppState(state => state.monuments.monuments);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(loadMonuments());
-    }, []);
+  useEffect(() => {
+    dispatch(loadMonuments());
+  }, []);
 
-    return <MonumentsListComponent monuments={monuments}/>
+  return <MonumentsListComponent
+    monuments={monuments} 
+  />
 }

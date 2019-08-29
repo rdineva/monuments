@@ -1,5 +1,5 @@
 import React from 'react';
-import { MonumentForm } from './components/monument/monument-create';
+import { MonumentCreate } from './containers/monument/monument-create';
 import { MonumentsList } from './containers/monument/monuments-list';
 import { CustomAppBar } from './components/app-bar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -20,7 +20,7 @@ export function App()  {
         <CssBaseline />
         <CustomAppBar />
         <Switch>
-          <Route path='/monuments/create' exact component={MonumentForm} />
+          <Route path='/monuments/create' exact component={MonumentCreate} />
           <Route path='/monuments/:id' exact component={MonumentPage} />
           <Route path='/monuments' exact component={MonumentsList} />
           <Route path='/' exact component={MonumentsMap} />

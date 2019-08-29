@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { MonumentCard } from './monument-card';
+import { MonumentCard } from '../../containers/monument/monument-card';
 import { MonumentsTitle } from './monuments-title';
 import { Monument } from '../../entities/monument';
 

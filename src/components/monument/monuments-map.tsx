@@ -32,7 +32,7 @@ export function MonumentsMap() {
   const classes = useStyles({});
   const monuments = getData();
   const [selectedMonument, setSelectedMonument] = useState(null);
-  const [state, setState] = useState(false);
+  const [drawer, setDrawer] = useState(false);
 
   const toggleDrawer = (open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -40,12 +40,12 @@ export function MonumentsMap() {
         return;
       }
 
-      setState(open);
+      setDrawer(open);
     };
 
   function OpenDrawer() {
     return selectedMonument && (
-      <Drawer anchor='right' open={state} onClose={toggleDrawer(false)} >
+      <Drawer anchor='right' open={drawer} onClose={toggleDrawer(false)} >
         <div className={classes.drawerBody}>
           <Container className={classes.container}>
             <Typography
@@ -86,9 +86,9 @@ export function MonumentsMap() {
             lng: parseFloat(`${selectedMonument.longitude}`)
           },
         }}
-        onClick={async () => {
-          await setSelectedMonument(selectedMonument);
-          setState(true);
+        onClick={() => {
+          setSelectedMonument(selectedMonument);
+          setDrawer(true);
         }}
       />
     );
@@ -109,7 +109,7 @@ export function MonumentsMap() {
             width: '100%',
           }}
         />
-        {monuments.map((selectedMonument) => MonumentMarkers(selectedMonument))}
+        {monuments.map(selectedMonument => MonumentMarkers(selectedMonument))}
       </GoogleMapProvider>
       {OpenDrawer()}
     </>
