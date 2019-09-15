@@ -7,5 +7,7 @@ The client side of the application made with React.
   * Redux
   * Google Maps
   * Material UI
-#### How to start
+#### Setup
+`npm install`
+#### Start
 `npm start`
