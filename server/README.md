@@ -1,15 +1,15 @@
-# Monuments
+## Monuments Server
 
-### Overview
-An ExpressJS project for storing and retrieving information about monuments in national parks.
+#### Overview
+The server side of the application made with ExpressJS.
 
-### Dependencies
+#### Dependencies
 - ExpressJS
 - TypeORM
 - Typescript
 
-### How to run
+#### How to run
 `npm start`
 
-### How to test
+#### How to test
 `npm test`
