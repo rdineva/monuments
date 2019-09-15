@@ -8,8 +8,11 @@ The server side of the application made with ExpressJS.
 - TypeORM
 - Typescript
 
-#### How to run
+#### Setup
+`npm install`
+
+#### Run
 `npm start`
 
-#### How to test
+#### Test
 `npm test`
