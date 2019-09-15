@@ -4,12 +4,10 @@ const API_URL = 'http://localhost:3000';
 
 class HttpService {
   private async sendHttpRequest(path: string, method: HTTPMethod, data?: any, options?: any): Promise<any> {
-    let requestOptions = Object.assign({}, { method }, options);
+    let requestOptions = { method, ...options };
 
     if (data) {
-      requestOptions = Object.assign({}, requestOptions, {
-        body: JSON.stringify(data)
-      });
+      requestOptions = { ...requestOptions, body: JSON.stringify(data) };
     }
 
     const response = await window.fetch(`${API_URL}/${path}`, requestOptions);

@@ -1,7 +1,7 @@
-import { MonumentsAction, actions } from './actions';
-import { Monument } from '../../entities/monument';
 import { combineReducers } from 'redux';
 import { getType } from 'typesafe-actions';
+import { MonumentsAction, actions } from './actions';
+import { Monument } from '../../entities/monument';
 
 function selectedMonument(state: Monument = null, action: MonumentsAction): Monument {
   switch (action.type) {
@@ -33,5 +33,5 @@ function createdMonument(state: Monument = null, action: MonumentsAction): Monum
 export default combineReducers({
   selectedMonument,
   monuments,
-  createdMonument
+  createdMonument,
 });

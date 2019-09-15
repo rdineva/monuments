@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  Typography, Container, makeStyles, CardMedia,
+  Container, Typography, CardMedia, makeStyles,
 } from '@material-ui/core';
-import { Monument } from '../../entities/monument';
 
-interface Props {
-  monument: Monument
-}
 
 const useStyles = makeStyles({
   container: {
@@ -18,10 +14,23 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MonumentPage({ monument }: Props) {
+
+export function MonumentDrawer(monument: any) {
+  const [state, setState] = useState(false);
   const classes = useStyles({});
 
-  return monument && (
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (event.type === 'keydown'
+      && ((event as React.KeyboardEvent).key === 'Tab'
+        || (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+
+    setState(open);
+  };
+
+  const info = (
     <Container
       maxWidth="md"
       className={classes.container}
@@ -36,10 +45,10 @@ export default function MonumentPage({ monument }: Props) {
       >
         Координати: [
         {monument.latitude}
-        ,
+,
         {' '}
         {monument.longitude}
-        ]
+]
       </Typography>
       <CardMedia
         component="img"
@@ -48,4 +57,6 @@ export default function MonumentPage({ monument }: Props) {
       />
     </Container>
   );
+
+  return info;
 }

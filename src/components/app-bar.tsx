@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { createStyles, makeStyles, Theme, fade } from '@material-ui/core/styles';
+import {
+  createStyles, makeStyles, Theme, fade,
+} from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,62 +13,60 @@ import { Button, InputBase, TextField } from '@material-ui/core';
 import { Redirect } from 'react-router';
 import { Path } from 'history';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-      justifyContent: 'space-between',
-      display: 'flex'
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  root: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    display: 'flex',
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  BeenHereIcon: {
+    marginRight: theme.spacing(1),
+  },
+  title: {
+    flexGrow: 1,
+    marginRight: '10px',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    BeenHereIcon: {
-      marginRight: theme.spacing(1),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto',
     },
-    title: {
-      flexGrow: 1,
-      marginRight: '10px',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
+    flexGrow: 1,
+  },
+  searchIcon: {
+    height: '100%',
+    justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: 200,
     },
-    search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-      },
-      flexGrow: 1
-    },
-    searchIcon: {
-      height: '100%',
-      justifyContent: 'center',
-      display: 'flex',
-      alignItems: 'center',
-      position: 'absolute',
-    },
-    inputRoot: {
-      color: 'inherit',
-    },
-    inputInput: {
-      padding: theme.spacing(1, 1, 1, 7),
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: 200,
-      },
-    }
-  }),
-);
+  },
+}));
 
-export function CustomAppBar() {
+export default function CustomAppBar() {
   const classes = useStyles({});
   const [redirect, setRedirect] = useState(null);
 
@@ -81,33 +81,39 @@ export function CustomAppBar() {
   return (
     <div className={classes.root}>
       <AppBar
-        position='static'
-        color='default'>
+        position="static"
+        color="default"
+      >
         <Toolbar>
           <Beenhere
-            className={classes.BeenHereIcon} />
+            className={classes.BeenHereIcon}
+          />
           <Typography
-            variant='h6'>
+            variant="h6"
+          >
             <Button
               onClick={() => onButtonClick('/')}
               className={classes.title}
-            >Начало
-              </Button>
+            >
+Начало
+            </Button>
           </Typography>
           <Typography
-            variant='h6'>
+            variant="h6"
+          >
             <Button
               onClick={() => onButtonClick('/monuments')}
               className={classes.title}
-            >Паметници
-              </Button>
+            >
+Паметници
+            </Button>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder='Търси...'
+              placeholder="Търси..."
               inputProps={{ 'aria-label': 'search' }}
               classes={{
                 root: classes.inputRoot,
@@ -117,11 +123,12 @@ export function CustomAppBar() {
           </div>
           {redirect}
           <Button
-            size='large'
-            color='inherit'
+            size="large"
+            color="inherit"
             onClick={() => onButtonClick('/monuments/create')}
-          >Създай
-            </Button>
+          >
+Създай
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
